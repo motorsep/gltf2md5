@@ -879,7 +879,7 @@ static bool WriteMD5Anim(const char *path,
     for (int f = 0; f < num_frames; f++) {
         float t = (float)f / fps;
         auto world = EvaluateJointWorldAtTime(skin, joints, anim, t, axes);
-        float bx_min=1e30, bx_max=-1e30, by_min=1e30, by_max=-1e30, bz_min=1e30, bz_max=-1e30;
+        float bx_min=1e30f, bx_max=-1e30f, by_min=1e30f, by_max=-1e30f, bz_min=1e30f, bz_max=-1e30f;
         for (size_t i = 0; i < joints.size(); i++) {
             float x = world[i].m[12] * scale;
             float y = world[i].m[13] * scale;
@@ -978,8 +978,8 @@ int main(int argc, char **argv) {
     const char *shader_override = nullptr;
 
     for (int i = 3; i < argc; i++) {
-        if      (!std::strcmp(argv[i], "-scale") && i+1 < argc) scale = std::atof(argv[++i]);
-        else if (!std::strcmp(argv[i], "-fps")   && i+1 < argc) fps   = std::atof(argv[++i]);
+        if      (!std::strcmp(argv[i], "-scale") && i+1 < argc) scale = (float)std::atof(argv[++i]);
+        else if (!std::strcmp(argv[i], "-fps")   && i+1 < argc) fps   = (float)std::atof(argv[++i]);
         else if (!std::strcmp(argv[i], "-v12"))                  v12 = true;
         else if (!std::strcmp(argv[i], "-noaxes"))               noaxes = true;
         else if (!std::strcmp(argv[i], "-noAnimPrefix"))         no_anim_prefix = true;
